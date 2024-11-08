@@ -41,9 +41,9 @@ public class PlaceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(placeResponse);
     }
 
-    @PutMapping
-    public ResponseEntity<Mono<PlaceResponse>> update(@Valid @RequestBody PlaceRequest request){
-        var placeResponse = placeService.update(request).map(PlaceMapper::fromPlaceToResponse);
+    @PutMapping("/{id}")
+    public ResponseEntity<Mono<PlaceResponse>> update(@PathVariable Long id,@Valid  @RequestBody PlaceRequest request){
+        var placeResponse = placeService.update(id, request).map(PlaceMapper::fromPlaceToResponse);
         return ResponseEntity.status(HttpStatus.OK).body(placeResponse);
     }
 

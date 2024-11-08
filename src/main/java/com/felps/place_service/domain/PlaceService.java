@@ -31,9 +31,21 @@ public class PlaceService {
         return placeRepository.save(place);
     }
 
-    public Mono<Place> update(PlaceRequest placeRequest){
-        var place = new Place(null, placeRequest.name(), slg.slugify(placeRequest.name()), placeRequest.state(), null, null);
-        return placeRepository.save(place);
+    public Mono<Place> update(Long id, PlaceRequest placeRequest) {
+        return placeRepository.findById(id)
+                .flatMap(existingPlace -> {
+
+                    existingPlace = new Place(
+                            existingPlace.id(),
+                            placeRequest.name(),
+                            slg.slugify(placeRequest.name()),
+                            placeRequest.state(),
+                            existingPlace.createdAt(),
+                            existingPlace.updatedAt()
+                    );
+                    return placeRepository.save(existingPlace);
+                })
+                .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Place not found")));
     }
 
     public Mono<Void> delete(Long id){

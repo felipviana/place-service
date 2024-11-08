@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Lugares</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Gerenciador de Lugares</h1>
+
+    <div class="container">
+        <form id="placeForm">
+            <input type="hidden" id="placeId">
+            <input type="text" id="name" placeholder="Place's name" required>
+            <input type="text" id="state" placeholder="State" required>
+            <button type="submit">Save</button>
+        </form>
+        <table id="placesTable">
+            <thread>
+                <tr>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>State</th>
+                    <th>Ações</th>
+                </tr>
+            </thread>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
